@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]")]//URL PATH, VALUE INSIDE SQUARE BRACKETS IS REPLACED BY NAME OF CLASS MINUS "Controller"
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]

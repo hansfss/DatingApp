@@ -29,3 +29,4 @@ namespace API.Data.Migrations
         }
     }
 }
+//THIS CLASS CREATES A DATABASE SCHEMA BASED ON YOUR CODE WRITTEN SO FAR (dotnet-ef)

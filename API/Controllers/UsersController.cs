@@ -28,3 +28,4 @@ namespace API.Controllers
         }
     }
 }
+//this class stores the API functions which provide tasks related to objects from the AppUser class

@@ -13,13 +13,18 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        // if we want to make a service or a class available to other areas of our application, we can add them inside this container
+        public void ConfigureServices(IServiceCollection services)// this is a dependency injection container
         {
+            //connects DataContext class with other parts of the project
+            //using the SQLite extension to configure the connection string
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));//string references DefaultConnection object in appsettings.Development.json (allows access to database)
             });
+
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -39,6 +44,8 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")); //url of angular project
 
             app.UseAuthorization();
 
