@@ -1,5 +1,11 @@
+using System.Text;
 using API.Data;
+using API.Extensions;
+using API.Interfaces;
+using API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -16,13 +22,8 @@ namespace API
         // if we want to make a service or a class available to other areas of our application, we can add them inside this container
         public void ConfigureServices(IServiceCollection services)// this is a dependency injection container
         {
-            //connects DataContext class with other parts of the project
-            //using the SQLite extension to configure the connection string
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));//string references DefaultConnection object in appsettings.Development.json (allows access to database)
-            });
-
+            services.AddApplicationServices(_config);//this class is found in the Services folder
+            services.AddIdentityServices(_config);
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
@@ -46,6 +47,8 @@ namespace API
             app.UseRouting();
 
             app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")); //url of angular project
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
