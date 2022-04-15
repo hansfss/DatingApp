@@ -39,7 +39,7 @@ namespace API.Controllers
             };
 
             _context.Users.Add(user);//user is added to the database
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();//saves changes to the database
 
             return new UserDto
             {
