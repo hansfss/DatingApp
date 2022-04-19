@@ -12,7 +12,10 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
             </li>
-          </ng-container>          
+          </ng-container> 
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
+          </li>         
         </ul>
 
         <div class="dropdown" dropdown *ngIf="(accountService.currentUser$ | async) as user">
@@ -20,12 +23,12 @@
           <div class="dropdown-menu mt-3" *dropdownMenu="">
             <a class="dropdown-item">Edit Profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" (click)="logout()">Logout</a>
+            <a class="dropdown-item" (click)="logout()" (click)="logInStatus()">Logout</a>
           </div>
         </div>
 
         <!--#loginForm turns the form into an angular form - (ngSubmit) submits the form data and assigns it to the login() method in navbar.component.ts-->
-        <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off" *ngIf="(accountService.currentUser$ | async) === null">
+        <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" (ngSubmit)="logInStatus()" autocomplete="off" *ngIf="(accountService.currentUser$ | async) === null">
         <!--to use 2 way binding input needs a name, and [(ngModel)] provides the 2 way binding-->
           <input
              name="username"

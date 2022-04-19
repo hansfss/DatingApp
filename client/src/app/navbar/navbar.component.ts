@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { NotFoundComponent } from '../errors/not-found/not-found.component';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 
@@ -10,11 +11,13 @@ import { AccountService } from '../_services/account.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent extends NotFoundComponent implements OnInit {
 
   model: any = {}
   //methods and properties from accountservice.ts are injected via the constructor
-  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) {
+    super();
+   }
 
   ngOnInit(): void {
 
