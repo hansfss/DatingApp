@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Helpers;
 using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,8 @@ namespace API.Extensions
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));//string references DefaultConnection object in appsettings.Development.json (allows access to database)
             });
             services.AddScoped<ITokenService, TokenService>();//service is added to make HTTP requests using tokens
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             return services;
         }
