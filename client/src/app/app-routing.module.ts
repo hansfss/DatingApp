@@ -18,7 +18,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],//authguard prevents user from navigating to this page without being signed in
     children: [
       {path: 'members', component: MemberListComponent},
-      {path: 'members/:id', component: MemberDetailComponent},
+      {path: 'members/:username', component: MemberDetailComponent},
       {path: 'lists', component: ListsComponent},
       {path: 'messages', component: MessagesComponent},
     ]

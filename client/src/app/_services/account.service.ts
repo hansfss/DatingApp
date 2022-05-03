@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = 'https://localhost:5001/api/';//imports apiUrl from environment.ts
   private currentUserSource = new ReplaySubject<User>(1);//ReplaySubject is an observable, it stores the values inside it and if somebody subscribes to it, it emits the last value inside it
   currentUser$ = this.currentUserSource.asObservable();
 
