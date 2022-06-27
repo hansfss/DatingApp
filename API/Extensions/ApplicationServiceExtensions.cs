@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Helpers;
 using API.Interfaces;
-using API.Services;
+using API.Services; 
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -21,8 +21,10 @@ namespace API.Extensions
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));//string references DefaultConnection object in appsettings.Development.json (allows access to database)
             });
             services.AddScoped<ITokenService, TokenService>();//service is added to make HTTP requests using tokens
+            services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));//references cloudinarySettings in appsettings.json
 
             return services;
         }
